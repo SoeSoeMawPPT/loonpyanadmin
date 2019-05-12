@@ -23,4 +23,5 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^administration/', include('administration.urls')),
+    url(r'^inventory/', include('inventory.urls')),
 ]

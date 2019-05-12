@@ -1,6 +1,15 @@
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    # path = 'images/{0}/{1}'.format(datetime.now().strftime('%Y/%m/%d'), filename)
+    # if Storage.exists(path):
+    #     path = Storage.get_available_name(path)
+    temp_path = 'product_photo_{0}/{1}'.format(datetime.now().strftime('%Y/%m/%d'), filename)
+    return temp_path
+
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=50)
@@ -88,11 +97,11 @@ class Products(models.Model):
     made_in = models.CharField(max_length=100)
     pdf_doc = models.FileField(max_length=100)
     technology = models.CharField(max_length=100)
-    photo_1 = models.FileField(upload_to='bus_images', null=True)
-    photo_2 = models.FileField(upload_to='bus_images', null=True)
-    photo_3 = models.FileField(upload_to='bus_images', null=True)
-    photo_4 = models.FileField(upload_to='bus_images', null=True)
-    photo_5 = models.FileField(upload_to='bus_images', null=True)
+    photo_1 =models.FileField(upload_to=user_directory_path, null=True, blank=True)
+    photo_2 = models.FileField(upload_to=user_directory_path, null=True, blank=True)
+    photo_3 = models.FileField(upload_to=user_directory_path, null=True, blank=True)
+    photo_4 = models.FileField(upload_to=user_directory_path, null=True, blank=True)
+    photo_5 = models.FileField(upload_to=user_directory_path, null=True, blank=True)
     rsrv_char_field_1 = models.CharField(max_length=80)
     rsrv_char_field_2 = models.CharField(max_length=80)
     rsrv_char_field_3 = models.CharField(max_length=80)
